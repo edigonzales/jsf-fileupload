@@ -20,6 +20,8 @@ dependencyManagement {
 
 dependencies {
     implementation 'org.joinfaces:jsf-spring-boot-starter'
+    implementation 'org.joinfaces:primefaces-spring-boot-starter'
+
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'

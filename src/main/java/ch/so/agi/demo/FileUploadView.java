@@ -39,8 +39,14 @@ public class FileUploadView {
         System.out.println(event.getSource());
         System.out.println(event.getComponent());
         System.out.println(event.getFacesContext());
+        
+        foo.add(event.getFile().getFileName());
     }
 
+    public int getSize() {
+        return foo.size();
+    }
+    
     public void handleFilesUpload(FilesUploadEvent event) {
         for (UploadedFile f : event.getFiles().getFiles()) {
             FacesMessage message = new FacesMessage("Successful", f.getFileName() + " is uploaded.");

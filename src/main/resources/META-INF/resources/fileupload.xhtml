@@ -17,8 +17,12 @@
 	<div class="card">
 	    <h:form enctype="multipart/form-data">
 	        <p:fileUpload listener="#{fileUploadView.handleFileUpload}" mode="advanced" dragDropSupport="false"
-	                      update="messages" sizeLimit="10000000" multiple="true" fileLimit="2" allowTypes="/(\.|\/)(itf|xtf|xml)$/i"
-	                      validateContentType="false" accept=".itf,.xtf,.xml"/>
+	                      update="messages,sizeInfo" sizeLimit="10000000" multiple="true" fileLimit="2" allowTypes="/(\.|\/)(itf|xtf|xml)$/i"
+	                      validateContentType="false" accept=".itf,.xtf,.xml"
+	                      sequential="true"/>
+	
+	
+	        <h:outputText id="sizeInfo" value="#{fileUploadView.size}" />
 	
 	        <p:growl id="messages" showDetail="true"/>
 	    </h:form>

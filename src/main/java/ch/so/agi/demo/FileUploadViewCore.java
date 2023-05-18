@@ -10,7 +10,9 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
+import jakarta.servlet.http.Part;
 
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,29 +22,23 @@ import java.util.List;
 @RequestScoped
 public class FileUploadViewCore {
 
-    private UploadedFile file;
-    private UploadedFiles files;
+    private List<Part> files;
     
-    private List<String> foo = new ArrayList<>();
-
-    public String getText() {
-        return "Hello from Spring: " + LocalDateTime.now();
-    }
-    
-    
-    public void handleFileUpload(FileUploadEvent event) {
-        FacesMessage message = new FacesMessage("Successful", event.getFile().getFileName() + " is uploaded.");
-        FacesContext.getCurrentInstance().addMessage(null, message);
-        
-        System.out.println(Thread.currentThread().getId());
-        System.out.println(event.getFile().getFileName());
-    }
-
-    public void handleFilesUpload(FilesUploadEvent event) {
-        for (UploadedFile f : event.getFiles().getFiles()) {
-            FacesMessage message = new FacesMessage("Successful", f.getFileName() + " is uploaded.");
-            FacesContext.getCurrentInstance().addMessage(null, message);
+    public void submit() {
+        for (Part part : files) {
+            String name = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+            long size = part.getSize();
+            System.out.println(name);            
         }
     }
+    
+    public List<Part> getFiles() {
+        return files;
+    }
+    
+    public void setFiles(List<Part> files) {
+        this.files = files;
+    }
+
 
 }
